@@ -31,7 +31,7 @@ class NearDBService(pb.pb_pb2_grpc.NearDBService):
             if request.offset + request.k < len(results):
                 return pb.pb_pb2.QueryResponse(items=[pb.pb_pb2.Item(id=result.id, distance=result.distance) for result in results[request.offset : request.offset + request.k]])
             raise Exception("Offset Exceed All")
-        feature = self.transform.getTagsFeature(request.taglist)
+        feature = self.transform.getTagsFeature(tuple(request.taglist))
         results = self.database.query(feature, request.all)
         self.cache[tuple(request.taglist) + (request.all,)] = results
         return pb.pb_pb2.QueryResponse(items=[pb.pb_pb2.Item(id=result.id, distance=result.distance) for result in results[request.offset : request.offset + request.k]])
