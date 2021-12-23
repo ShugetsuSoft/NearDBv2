@@ -15,5 +15,10 @@ else:
     milvusHost = "127.0.0.1"
     milvusPort = "19530"
 
-ser = server.NearDBServer(seraddr, milvusHost, milvusPort)
+if "bert-as-service" in config:
+    bertHost = config["bert-as-service"]["host"]
+else:
+    bertHost = "127.0.0.1"
+
+ser = server.NearDBServer(seraddr, milvusHost, milvusPort, bertHost)
 ser.run()

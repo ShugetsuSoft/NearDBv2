@@ -5,9 +5,9 @@ from neardbv2 import transform
 from lru import LRU
 
 class NearDBService(pb.pb_pb2_grpc.NearDBService):
-    def __init__(self, server, milvus_host, milvus_port):
+    def __init__(self, server, milvus_host, milvus_port, bert_service_host):
         self.database = database.Database(milvus_host, milvus_port)
-        self.transform = transform.Transform()
+        self.transform = transform.Transform(bert_service_host)
         self.cache = LRU(200)
         pb.pb_pb2_grpc.add_NearDBServiceServicer_to_server(self, server)
     def Add(self, request, context):
