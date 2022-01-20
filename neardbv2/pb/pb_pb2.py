@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x08pb.proto\x12\x0bneardbv2.pb\")\n\nAddRequest\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0f\n\x07taglist\x18\x02 \x03(\t\"\x1b\n\rRemoveRequest\x12\n\n\x02id\x18\x03 \x01(\x04\"\x0e\n\x0cNoneResponse\"*\n\x0cQueryRequest\x12\x0f\n\x07taglist\x18\x04 \x03(\t\x12\t\n\x01k\x18\x05 \x01(\x03\"K\n\x10QueryPageRequest\x12\x0f\n\x07taglist\x18\x04 \x03(\t\x12\t\n\x01k\x18\x05 \x01(\x03\x12\x0e\n\x06offset\x18\x06 \x01(\x03\x12\x0b\n\x03\x61ll\x18\x07 \x01(\x03\"$\n\x04Item\x12\n\n\x02id\x18\x08 \x01(\x04\x12\x10\n\x08\x64istance\x18\t \x01(\x02\"1\n\rQueryResponse\x12 \n\x05items\x18\n \x03(\x0b\x32\x11.neardbv2.pb.Item2\x9b\x02\n\rNearDBService\x12;\n\x03\x41\x64\x64\x12\x17.neardbv2.pb.AddRequest\x1a\x19.neardbv2.pb.NoneResponse\"\x00\x12@\n\x05Query\x12\x19.neardbv2.pb.QueryRequest\x1a\x1a.neardbv2.pb.QueryResponse\"\x00\x12H\n\tQueryPage\x12\x1d.neardbv2.pb.QueryPageRequest\x1a\x1a.neardbv2.pb.QueryResponse\"\x00\x12\x41\n\x06Remove\x12\x1a.neardbv2.pb.RemoveRequest\x1a\x19.neardbv2.pb.NoneResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x08pb.proto\x12\x0bneardbv2.pb\")\n\nAddRequest\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0f\n\x07taglist\x18\x02 \x03(\t\"\x1b\n\rRemoveRequest\x12\n\n\x02id\x18\x03 \x01(\x04\"\x0e\n\x0cNoneResponse\"9\n\x0cQueryRequest\x12\x0f\n\x07taglist\x18\x04 \x03(\t\x12\t\n\x01k\x18\x05 \x01(\x03\x12\r\n\x05\x64rift\x18\x06 \x01(\x01\"$\n\x04Item\x12\n\n\x02id\x18\x08 \x01(\x04\x12\x10\n\x08\x64istance\x18\t \x01(\x02\"1\n\rQueryResponse\x12 \n\x05items\x18\n \x03(\x0b\x32\x11.neardbv2.pb.Item2\xd1\x01\n\rNearDBService\x12;\n\x03\x41\x64\x64\x12\x17.neardbv2.pb.AddRequest\x1a\x19.neardbv2.pb.NoneResponse\"\x00\x12@\n\x05Query\x12\x19.neardbv2.pb.QueryRequest\x1a\x1a.neardbv2.pb.QueryResponse\"\x00\x12\x41\n\x06Remove\x12\x1a.neardbv2.pb.RemoveRequest\x1a\x19.neardbv2.pb.NoneResponse\"\x00\x62\x06proto3'
 )
 
 
@@ -143,6 +143,13 @@ _QUERYREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='drift', full_name='neardbv2.pb.QueryRequest.drift', index=2,
+      number=6, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -156,60 +163,7 @@ _QUERYREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=113,
-  serialized_end=155,
-)
-
-
-_QUERYPAGEREQUEST = _descriptor.Descriptor(
-  name='QueryPageRequest',
-  full_name='neardbv2.pb.QueryPageRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='taglist', full_name='neardbv2.pb.QueryPageRequest.taglist', index=0,
-      number=4, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='k', full_name='neardbv2.pb.QueryPageRequest.k', index=1,
-      number=5, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='offset', full_name='neardbv2.pb.QueryPageRequest.offset', index=2,
-      number=6, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='all', full_name='neardbv2.pb.QueryPageRequest.all', index=3,
-      number=7, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=157,
-  serialized_end=232,
+  serialized_end=170,
 )
 
 
@@ -247,8 +201,8 @@ _ITEM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=234,
-  serialized_end=270,
+  serialized_start=172,
+  serialized_end=208,
 )
 
 
@@ -279,8 +233,8 @@ _QUERYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=272,
-  serialized_end=321,
+  serialized_start=210,
+  serialized_end=259,
 )
 
 _QUERYRESPONSE.fields_by_name['items'].message_type = _ITEM
@@ -288,7 +242,6 @@ DESCRIPTOR.message_types_by_name['AddRequest'] = _ADDREQUEST
 DESCRIPTOR.message_types_by_name['RemoveRequest'] = _REMOVEREQUEST
 DESCRIPTOR.message_types_by_name['NoneResponse'] = _NONERESPONSE
 DESCRIPTOR.message_types_by_name['QueryRequest'] = _QUERYREQUEST
-DESCRIPTOR.message_types_by_name['QueryPageRequest'] = _QUERYPAGEREQUEST
 DESCRIPTOR.message_types_by_name['Item'] = _ITEM
 DESCRIPTOR.message_types_by_name['QueryResponse'] = _QUERYRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -321,13 +274,6 @@ QueryRequest = _reflection.GeneratedProtocolMessageType('QueryRequest', (_messag
   })
 _sym_db.RegisterMessage(QueryRequest)
 
-QueryPageRequest = _reflection.GeneratedProtocolMessageType('QueryPageRequest', (_message.Message,), {
-  'DESCRIPTOR' : _QUERYPAGEREQUEST,
-  '__module__' : 'pb_pb2'
-  # @@protoc_insertion_point(class_scope:neardbv2.pb.QueryPageRequest)
-  })
-_sym_db.RegisterMessage(QueryPageRequest)
-
 Item = _reflection.GeneratedProtocolMessageType('Item', (_message.Message,), {
   'DESCRIPTOR' : _ITEM,
   '__module__' : 'pb_pb2'
@@ -351,8 +297,8 @@ _NEARDBSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=324,
-  serialized_end=607,
+  serialized_start=262,
+  serialized_end=471,
   methods=[
   _descriptor.MethodDescriptor(
     name='Add',
@@ -375,19 +321,9 @@ _NEARDBSERVICE = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
-    name='QueryPage',
-    full_name='neardbv2.pb.NearDBService.QueryPage',
-    index=2,
-    containing_service=None,
-    input_type=_QUERYPAGEREQUEST,
-    output_type=_QUERYRESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
     name='Remove',
     full_name='neardbv2.pb.NearDBService.Remove',
-    index=3,
+    index=2,
     containing_service=None,
     input_type=_REMOVEREQUEST,
     output_type=_NONERESPONSE,

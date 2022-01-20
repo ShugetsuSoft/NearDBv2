@@ -3,20 +3,19 @@ from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Colle
 
 
 class Database():
-    def __init__(self, host, port):
+    def __init__(self, host, port, collection):
         connections.connect(alias=str(id(self)), host=host, port=port)
         schema = CollectionSchema([
     		FieldSchema("_id", DataType.INT64, is_primary=True),
     		FieldSchema("_data", dtype=DataType.FLOAT_VECTOR, dim=768)
 		])
-        self.collection = Collection("db", schema, using=str(id(self)), shards_num=2)
+        self.collection = Collection(collection, schema, using=str(id(self)), shards_num=2)
         self.collection.load()
 
     def createIndex(self):
         default_index = {"index_type": "HNSW", "params": {"M": 48, "efConstruction": 50}, "metric_type": "L2"}
         self.collection.create_index(field_name="_data", index_params=default_index)
         self.collection.load()
-    
     def insert(self, did, vector):
         self.collection.insert([
             [did],

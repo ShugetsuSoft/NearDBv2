@@ -24,11 +24,6 @@ class NearDBServiceStub(object):
                 request_serializer=pb__pb2.QueryRequest.SerializeToString,
                 response_deserializer=pb__pb2.QueryResponse.FromString,
                 )
-        self.QueryPage = channel.unary_unary(
-                '/neardbv2.pb.NearDBService/QueryPage',
-                request_serializer=pb__pb2.QueryPageRequest.SerializeToString,
-                response_deserializer=pb__pb2.QueryResponse.FromString,
-                )
         self.Remove = channel.unary_unary(
                 '/neardbv2.pb.NearDBService/Remove',
                 request_serializer=pb__pb2.RemoveRequest.SerializeToString,
@@ -51,12 +46,6 @@ class NearDBServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def QueryPage(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def Remove(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -74,11 +63,6 @@ def add_NearDBServiceServicer_to_server(servicer, server):
             'Query': grpc.unary_unary_rpc_method_handler(
                     servicer.Query,
                     request_deserializer=pb__pb2.QueryRequest.FromString,
-                    response_serializer=pb__pb2.QueryResponse.SerializeToString,
-            ),
-            'QueryPage': grpc.unary_unary_rpc_method_handler(
-                    servicer.QueryPage,
-                    request_deserializer=pb__pb2.QueryPageRequest.FromString,
                     response_serializer=pb__pb2.QueryResponse.SerializeToString,
             ),
             'Remove': grpc.unary_unary_rpc_method_handler(
@@ -126,23 +110,6 @@ class NearDBService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/neardbv2.pb.NearDBService/Query',
             pb__pb2.QueryRequest.SerializeToString,
-            pb__pb2.QueryResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def QueryPage(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/neardbv2.pb.NearDBService/QueryPage',
-            pb__pb2.QueryPageRequest.SerializeToString,
             pb__pb2.QueryResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
