@@ -10,8 +10,7 @@ class Database():
     		FieldSchema("_data", dtype=DataType.FLOAT_VECTOR, dim=768)
 		])
         self.collection = Collection(collection, schema, using=str(id(self)))
-        self.collection.load()
-
+        self.createIndex()
     def createIndex(self):
         default_index = {"index_type": "HNSW", "params": {"M": 48, "efConstruction": 50}, "metric_type": "L2"}
         self.collection.create_index(field_name="_data", index_params=default_index)
