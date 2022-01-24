@@ -10,7 +10,7 @@ class NearDBService(pb.pb_pb2_grpc.NearDBService):
         self.transform = transform.Transform(bert_service_host)
         pb.pb_pb2_grpc.add_NearDBServiceServicer_to_server(self, server)
     def Add(self, request, context):
-        feature = self.transform.getTagsFeature(request.taglist)
+        feature = self.transform.getTagsFeature(list(request.taglist))
         self.database.insert(request.id, feature)
         return pb.pb_pb2.NoneResponse()
     def Query(self, request, context):
