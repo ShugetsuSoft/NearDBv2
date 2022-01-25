@@ -24,5 +24,8 @@ class Database():
         search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
         res = self.collection.search([vector], "_data", search_params, k)
         return tuple(res[0])
+    def get(self, did):
+        res = self.collection.query("_id == %d"%did, ["_data"])
+        return tuple(res[0]["_data"])
     def delete(self, did):
         self.collection.delete("_id == %d"%did)
