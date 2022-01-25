@@ -21,6 +21,8 @@ class NearDBService(pb.pb_pb2_grpc.NearDBService):
         return pb.pb_pb2.QueryResponse(items=[pb.pb_pb2.Item(id=result.id, distance=result.distance) for result in results])
     def QueryById(self, request, context):
         feature = self.database.get(request.id)
+        if len(feature) < 1:
+            return pb.pb_pb2.QueryResponse(items=[])
         if request.drift != 0:
             feature += numpy.random.normal(0,request.drift,768)
         results = self.database.query(feature, request.k)

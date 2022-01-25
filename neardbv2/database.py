@@ -26,6 +26,8 @@ class Database():
         return tuple(res[0])
     def get(self, did):
         res = self.collection.query("_id == %d"%did, ["_data"])
+        if len(res) < 1:
+            return ()
         return tuple(res[0]["_data"])
     def delete(self, did):
         self.collection.delete("_id == %d"%did)
