@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
-import rocksdb
+import plyvel
 import msgpack
 
 def int_to_bytes(x: int) -> bytes:
@@ -16,7 +16,7 @@ class Database():
     		FieldSchema("_id", DataType.INT64, is_primary=True),
     		FieldSchema("_data", dtype=DataType.FLOAT_VECTOR, dim=768)
 		])
-        self.kvdb = rocksdb.DB(kvdbpath, rocksdb.Options(create_if_missing=True))
+        self.db = plyvel.DB(kvdbpath, create_if_missing=True)
         self.collection = Collection(collection, schema, using=str(id(self)))
         self.createIndex()
     def createIndex(self):
