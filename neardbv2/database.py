@@ -2,6 +2,8 @@
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection
 import plyvel
 import msgpack
+import msgpack_numpy as m
+m.patch()
 
 def int_to_bytes(x: int) -> bytes:
     return x.to_bytes((x.bit_length() + 7) // 8, 'big')
