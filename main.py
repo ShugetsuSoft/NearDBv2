@@ -17,5 +17,10 @@ else:
     milvusPort = "19530"
     collection = "neardb_vec"
 
-ser = server.NearDBServer(seraddr, milvusHost, milvusPort, collection)
+if "database" in config:
+    kvdbpath = config["database"]["kvpath"]
+else:
+    kvdbpath = "vectors.db"
+
+ser = server.NearDBServer(seraddr, milvusHost, milvusPort, collection, kvdbpath)
 ser.run()
