@@ -16,7 +16,7 @@ class Database():
     		FieldSchema("_id", DataType.INT64, is_primary=True),
     		FieldSchema("_data", dtype=DataType.FLOAT_VECTOR, dim=768)
 		])
-        self.db = plyvel.DB(kvdbpath, create_if_missing=True)
+        self.kvdb = plyvel.DB(kvdbpath, create_if_missing=True)
         self.collection = Collection(collection, schema, using=str(id(self)))
         self.createIndex()
     def createIndex(self):
