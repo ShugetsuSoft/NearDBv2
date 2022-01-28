@@ -20,9 +20,9 @@ class Database():
 		])
         self.kvdb = plyvel.DB(kvdbpath, create_if_missing=True)
         self.collection = Collection(collection, schema, using=str(id(self)))
-        self.createIndex()
+        self.collection.load()
     def createIndex(self):
-        default_index = {"index_type": "HNSW", "params": {"M": 48, "efConstruction": 50}, "metric_type": "L2"}
+        default_index = {"index_type": "HNSW", "params": {"M": 48, "efConstruction": 50}, "metric_type": "L2", "nlist": 4096}
         self.collection.create_index(field_name="_data", index_params=default_index)
         self.collection.load()
     def insert(self, did, vector):
@@ -32,7 +32,7 @@ class Database():
             [vector]
         ])
     def query(self, vector, k):
-        search_params = {"metric_type": "L2", "params": {"nprobe": 10}}
+        search_params = {"metric_type": "L2", "params": {"nprobe": 128}}
         res = self.collection.search([vector], "_data", search_params, k)
         return tuple(res[0])
     def get(self, did):
