@@ -26,7 +26,7 @@ class Database():
         self.collection.create_index(field_name="_data", index_params=default_index)
         self.collection.load()
     def insert(self, did, vector):
-        self.kvdb.put(did, msgpack.packb(vector))
+        self.kvdb.put(int_to_bytes(did), msgpack.packb(vector))
         self.collection.insert([
             [did],
             [vector]
@@ -36,11 +36,11 @@ class Database():
         res = self.collection.search([vector], "_data", search_params, k)
         return tuple(res[0])
     def get(self, did):
-        res = self.kvdb.get(did)
+        res = self.kvdb.key(int_to_bytes(did)).value
         if res:
             res = msgpack.unpackb(res)
             return tuple(res)
         return ()
     def delete(self, did):
-        self.kvdb.delete(did)
+        self.kvdb.delete(int_to_bytes(did))
         self.collection.delete("_id == %d"%did)
