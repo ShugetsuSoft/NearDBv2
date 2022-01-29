@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
 import numpy
 
+from bert_serving.client import BertClient
 
+class Transform():
+    def __init__(self, ip):
+        self.cli = BertClient(ip=ip)
+    def getTagsFeature(self, words):
+        return numpy.squeeze(sum(self.cli.encode(words))/len(words))
+
+'''
 from transformers import BertTokenizer, TFBertModel
 
 class Transform():
@@ -17,3 +25,4 @@ class Transform():
     def getTagsFeature(self, words):
         return numpy.squeeze(sum([self.getFeature(word) for word in words])/len(words))
         #return numpy.squeeze(getFeature(" ||| ".join(words)))
+'''

@@ -18,9 +18,16 @@ else:
     collection = "neardb_vec"
 
 if "database" in config:
-    kvdbpath = config["database"]["kvpath"]
+    etcdhost = config["database"]["etcdhost"]
+    etcdport = config["database"]["etcdport"]
 else:
-    kvdbpath = "vectors.db"
+    etcdhost = "localhost"
+    etcdport = 2379
 
-ser = server.NearDBServer(seraddr, milvusHost, milvusPort, collection, kvdbpath)
+if "bert" in config:
+    berthost = config["bert"]["host"]
+else:
+    berthost = "localhost"
+
+ser = server.NearDBServer(seraddr, milvusHost, milvusPort, collection, etcdhost, etcdport, berthost)
 ser.run()

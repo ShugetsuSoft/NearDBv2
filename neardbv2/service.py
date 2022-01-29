@@ -5,9 +5,9 @@ import numpy
 from neardbv2 import transform
 
 class NearDBService(pb.pb_pb2_grpc.NearDBService):
-    def __init__(self, server, milvus_host, milvus_port, collection, kvdbpath):
-        self.database = database.Database(milvus_host, milvus_port, collection, kvdbpath)
-        self.transform = transform.Transform()
+    def __init__(self, server, milvus_host, milvus_port, collection, etcdhost, etcdport, berthost):
+        self.database = database.Database(milvus_host, milvus_port, collection, etcdhost, etcdport)
+        self.transform = transform.Transform(berthost)
         pb.pb_pb2_grpc.add_NearDBServiceServicer_to_server(self, server)
     def Add(self, request, context):
         feature = self.transform.getTagsFeature(list(request.taglist))
