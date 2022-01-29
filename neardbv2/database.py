@@ -37,7 +37,7 @@ class Database():
         return tuple(res[0])
     def get(self, did):
         res = self.kvdb.range(int_to_bytes(did)).kvs
-        if len(res) > 0:
+        if res and len(res) > 0:
             res = res[0].value
             res = msgpack.unpackb(res)
             return tuple(res)
